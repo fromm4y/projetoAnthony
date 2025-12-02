@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Este site explora os animais mais perigosos do mundo, apresentando informações sobre suas características, habitats e comportamentos. Descubra quais criaturas representam maior risco à vida humana e como evitar encontros com elas." />
+  <title>OS ANIMAIS MAIS PERIGOSOS DO MAR — Sob as ondas, reina o perigo.</title>
+  <link rel="stylesheet" href="style.css">
+<!-- Bibliotecas -->
+<script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.8.0/dist/tf.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  
+</head>
+<body>
+  <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto;overflow:hidden">Pular para o conteúdo</a>
+
+  <header role="banner" aria-label="Cabeçalho principal">
+    <div class="container">
+      <div class="brand" aria-hidden="false">
+        <div class="logo" aria-hidden="true">🌊</div>
+        <div>
+          <div class="team" style="font-weight:800">OS PERNA DE PAU</div>
+          <div style="font-size:.82rem;color:var(--muted);">Projeto: Fundo do Mar</div>
+        </div>
+      </div>
+
+      <nav role="navigation" aria-label="Navegação principal">
+        <ul>
+          <li><a href="#curiosidades">Curiosidades</a></li>
+          <li><a href="#fatos">Fatos</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex;gap:.5rem;align-items:center;margin-left:12px">
+        <button id="themeToggle" aria-pressed="false" title="Alternar modo claro/escuro" class="btn secondary">Modo</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container" role="main" aria-labelledby="pageTitle">
+    <section class="hero" aria-label="Introdução">
+      <div class="hero-left">
+        <h1 id="pageTitle">OS ANIMAIS MAIS PERIGOSOS DO MAR</h1>
+        <p class="subtitle" id="heroSlogan">🔱 Sob as ondas, reina o perigo.</p>
+        <p class="muted">Este site explora os animais mais perigosos do mundo, apresentando informações sobre suas características, habitats e comportamentos. Descubra quais criaturas representam maior risco à vida humana e como evitar encontros com elas.</p>
+
+        <div class="hero-cta" role="region" aria-label="Ações principais">
+          <!-- TODO: Alunos, troquem o texto ou incluam ícones se desejarem -->
+          <button id="abrirIA" class="btn" aria-label="Iniciar reconhecimento facial">Reconhecimento Facial</button>
+          <button id="btnAbrirChatbot" class="btn secondary" aria-controls="chatPanel" aria-label="Abrir chatbot">Abrir Chatbot</button>
+        </div>
+
+        <p style="margin-top:1rem;font-size:.9rem;color:var(--muted)"><strong>Autores:</strong> ARTHUR RODRIGUES DA CRUZ, LORENZO OLIVEIRA DE MEDEIROS, ANTHONY KEVIN DE MELO ALVES, PEDRO AUGUSTO BORGES DE SOUSA</p>
+      </div>
+
+      <div class="hero-right" aria-hidden="false">
+        <img src="https://i.redd.it/awh9d3jhdh4e1.png" alt="Água-viva-caixa (Box Jellyfish) em águas tropicais — imagem ilustrativa" />
+      </div>
+    </section>
+
+    <!-- Curiosidades -->
+    <section id="curiosidades" aria-labelledby="curioTitle" style="margin-top:1rem">
+      <div class="section-title">
+        <h2 id="curioTitle">Curiosidades</h2>
+        <div class="muted">Fatos rápidos sobre o fundo do mar</div>
+      </div>
+
+      <div class="curiosidades" role="list">
+        <article class="curio" role="listitem" tabindex="0">
+          <div class="icon-circle" aria-hidden="true">1</div>
+          <p><strong>A água-viva-caixa</strong> pode matar um humano em poucos minutos.</p>
+        </article>
+
+        <article class="curio" role="listitem" tabindex="0">
+          <div class="icon-circle" aria-hidden="true">2</div>
+          <p><strong>Polvo-de-anel-azul</strong> cabe na palma da mão, mas tem veneno letal.</p>
+        </article>
+
+        <article class="curio" role="listitem" tabindex="0">
+          <div class="icon-circle" aria-hidden="true">3</div>
+          <p><strong>Peixe-pedra</strong> se camufla tão bem que parece uma rocha.</p>
+        </article>
+
+        <article class="curio" role="listitem" tabindex="0">
+          <div class="icon-circle" aria-hidden="true">4</div>
+          <p><strong>Lula-colossal</strong> tem olhos do tamanho de bolas de futebol.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Fatos / Ciência -->
+    <section id="fatos" aria-labelledby="fatosTitle" style="margin-top:1.6rem">
+      <div class="section-title">
+        <h2 id="fatosTitle">Fatos & Ciência</h2>
+        <div class="muted">Entenda com brevidade</div>
+      </div>
+
+      <div class="fatos">
+        <article class="card" tabindex="0" aria-labelledby="fato1Title">
+          <h3 id="fato1Title">🦈 Tubarão-Branco: O Caçador Supremo</h3>
+          <p>Com até 6 metros de comprimento, o tubarão-branco detecta pequenas quantidades de sangue e é um predador muito eficiente nos ecossistemas marinhos.</p>
+        </article>
+
+        <article class="card" tabindex="0" aria-labelledby="fato2Title">
+          <h3 id="fato2Title">🦑 Água-viva-Caixa: Veneno Letal</h3>
+          <p>Encontrada principalmente no Indo-Pacífico, sua toxina pode afetar o coração e o sistema nervoso — queimaduras graves e risco de morte em casos severos.</p>
+        </article>
+
+        <article class="card" tabindex="0" aria-labelledby="fato3Title">
+          <h3 id="fato3Title">🐙 Polvo-de-Anéis-Azuis: Beleza Mortal</h3>
+          <p>Pequeno mas extremamente venenoso; seu veneno pode causar paralisia rápida. Por sua aparência, é fácil subestimar o risco.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Galeria -->
+    <section id="galeria" aria-labelledby="galTitle" style="margin-top:1.6rem">
+      <div class="section-title">
+        <h2 id="galTitle">Galeria</h2>
+        <div class="muted">Imagens selecionadas — legendas curtas</div>
+      </div>
+
+      <div class="gallery" role="list">
+        <figure tabindex="0">
+          <img src="https://i.redd.it/awh9d3jhdh4e1.png" alt="Água-viva-caixa fotografada na natureza" />
+          <figcaption>Água-viva-caixa — Tóxica.</figcaption>
+        </figure>
+
+        <figure tabindex="0">
+          <img src="https://nossacara.com/userfiles/image/2022/2023/01/Diversas_02/eneisazuis.jpg" alt="Polvo-de-anel-azul em superfície de rocha" />
+          <figcaption>Polvo-de-anel-azul — Pequeno e perigoso.</figcaption>
+        </figure>
+
+        <figure tabindex="0">
+          <img src="https://static.todamateria.com.br/upload/tu/ba/tubaraobranco-cke.jpg" alt="Tubarão-branco nadando perto da superfície" />
+          <figcaption>Tubarão-branco — Predador.</figcaption>
+        </figure>
+
+        <figure tabindex="0">
+          <img src="https://mega.ibxk.com.br/2024/05/10/10162703221411.jpg?ims=1232x490" alt="Peixe-pedra camuflado entre rochas" />
+          <figcaption>Peixe-pedra — Mestre da camuflagem.</figcaption>
+        </figure>
+
+        <figure tabindex="0">
+          <img src="https://img.odcdn.com.br/wp-content/uploads/2024/06/arraia-scaled.jpg" alt="Arraia nadando em águas rasas" />
+          <figcaption>Arraia — Défesa com ferrão.</figcaption>
+        </figure>
+
+        <figure tabindex="0">
+          <img src="https://surftotal.com/media/k2/items/cache/de533599bbe95598cba873f40c0226b0_XL.webp" alt="Orca nadando em alto mar" />
+          <figcaption>Orca — Predadora social.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" aria-labelledby="faqTitle" style="margin-top:1.6rem">
+      <div class="section-title">
+        <h2 id="faqTitle">Perguntas Frequentes</h2>
+        <div class="muted">Respostas rápidas</div>
+      </div>
+
+      <div>
+        <details>
+          <summary>Qual é o animal marinho mais perigoso do mundo?</summary>
+          <p class="muted">A água-viva-caixa (Box Jellyfish) é considerada a mais venenosa do mundo e pode ser mortal.</p>
+        </details>
+
+        <details>
+          <summary>Todo tubarão é perigoso para os humanos?</summary>
+          <p class="muted">Não. Apenas algumas espécies relatam ataques — como tubarão-branco, tigre e-touro — a maioria evita humanos.</p>
+        </details>
+
+        <details>
+          <summary>O que devo fazer se for queimado por uma água-viva?</summary>
+          <p class="muted">Remova cuidadosamente tentáculos (com luvas ou vara), lave com vinagre e procure atendimento médico imediatamente.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <section aria-label="Call to action" style="margin-top:1.6rem">
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:1rem">
+        <div>
+          <h3>Quer aprender mais?</h3>
+          <p class="muted">Explore os fatos, baixe o material de estudo e compartilhe com sua turma.</p>
+        </div>
+        <div class="cta-footer">
+          <a class="btn" href="#fatos">Aprenda mais</a>
+          <a class="btn secondary" href="#galeria">Ver galeria</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Créditos / Fontes -->
+    <aside aria-label="Créditos e fontes" style="margin-top:1.6rem">
+      <div class="muted" style="font-size:.95rem">
+        <strong>Créditos / Fontes:</strong>
+        <ul>
+          <li>Imagens: links fornecidos pelo grupo (Unsplash/Reddit/arquivos públicos)</li>
+          <li>Conteúdo: compilações educacionais — NOAA, IUCN, artigos científicos e bases públicas.</li>
+          <li><!-- TODO: Substituir por links específicos de referência --></li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Chatbot panel (injected by JS) -->
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+
+    <df-messenger
+      intent="WELCOME"
+      chat-title="Chatbot-IA"
+      agent-id="7e9ea28d-fc2a-4f18-a435-1d31267d9a34"
+      language-code="pt-br">
+    </df-messenger>
+
+  <footer class="container" role="contentinfo">
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%">
+      <div class="muted">© <span id="year"></span> Projeto Fundo do Mar — OS PERNA DE PAU</div>
+      <div style="display:flex;gap:1rem;align-items:center">
+        <a class="to-top" href="#main">Voltar ao topo ↑</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- MODAL DE RECONHECIMENTO FACIAL -->
+<div id="cameraModal" class="modal-camera" aria-hidden="true">
+  <div class="modal-camera-content">
+
+    <button id="fecharModal" class="modal-camera-close" title="Fechar">❌</button>
+
+    <h2 class="modal-camera-title">Reconhecimento Facial</h2>
+
+    <div class="modal-video-wrap">
+      <video id="video" autoplay muted playsinline></video>
+    </div>
+
+    <div class="modal-camera-controls">
+      <button id="tirarFoto" class="modal-camera-btn" title="Tirar foto">📸 Tirar Foto</button>
+    </div>
+
+    <p id="modalStatus" class="modal-camera-status">Aguardando...</p>
+
+    <canvas id="fotoCanvas" style="display:none;"></canvas>
+
+  </div>
+</div>
+
+ <script src="script.js" defer></script>
+  
+</body>
+</html>

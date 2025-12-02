@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resultado - Emoção Oceânica</title>
+
+  <style>
+/* ===========================
+   ESTILO DO TEMA COMPLETO
+   =========================== */
+
+:root{
+  --bg:#0b2340;
+  --card:#0f3557;
+  --muted:#a9c0d9;
+  --accent:#00b7d1;
+  --accent-2:#00d1b2;
+  --glass: rgba(255,255,255,0.04);
+  --radius:14px;
+  --focus: 3px solid rgba(0,183,209,0.25);
+  --text:#eaf6ff;
+  --shadow: 0 6px 18px rgba(3,12,25,0.6);
+  --ease: cubic-bezier(.2,.9,.3,1);
+  --transition: .28s ease;
+}
+
+body{
+  margin:0;
+  padding:40px 18px;
+  background: linear-gradient(180deg, var(--bg) 0%, #071726 100%);
+  color:var(--text);
+  font-family: system-ui, Arial, sans-serif;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.45;
+  animation: fadeInPage 0.6s var(--ease) both;
+}
+
+@keyframes fadeInPage{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+
+/* ===========================
+   TÍTULOS
+   =========================== */
+
+h1{
+  margin:0;
+  font-size:2rem;
+  letter-spacing:-0.02em;
+  animation: fadeUp .6s var(--ease) both;
+}
+
+h2{
+  margin-top:6px;
+  font-size:1.7rem;
+  color:var(--accent);
+  font-weight:700;
+  animation: fadeUp .75s var(--ease) both;
+}
+
+p{
+  color:var(--muted);
+  margin-bottom:22px;
+  font-size:1.1rem;
+  animation: fadeUp .9s var(--ease) both;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform: translateY(10px);}
+  to{opacity:1; transform:none;}
+}
+
+/* ===========================
+   CARD PRINCIPAL
+   =========================== */
+
+.card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  background:var(--card);
+  padding:24px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  backdrop-filter: blur(6px);
+  width:min(95%, 420px);
+  margin:0 auto;
+  animation: fadeUp 1s var(--ease) both;
+}
+
+.card img{
+  width:100%;
+  border-radius:12px;
+  margin-bottom:20px;
+  box-shadow:var(--shadow);
+  object-fit:cover;
+}
+
+/* ===========================
+   BOTÃO
+   =========================== */
+
+button{
+  padding:12px 22px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:700;
+  color:white;
+  font-size:1rem;
+  background:linear-gradient(90deg, var(--accent), var(--accent-2));
+  box-shadow:var(--shadow);
+  transition:transform .2s var(--ease), opacity .2s var(--ease);
+}
+
+button:hover{
+  transform:translateY(-4px);
+}
+
+/* Chatbot esconder (se quiser usar depois) */
+df-messenger {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+df-messenger.aberto {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+  </style>
+</head>
+<body>
+
+  <h1>🌊 Emoção detectada:</h1>
+  <h2 id="emocaoTitle">Processando...</h2>
+  <p id="confTitle"></p>
+
+  <div class="card">
+    <img id="imagemEmocao" alt="Imagem relacionada à emoção" />
+    <button onclick="voltar()">Voltar</button>
+  </div>
+
+  <script>
+/* ===========================
+   IMAGENS POR EMOÇÃO
+   =========================== */
+
+const imagensPorEmocao = {
+  feliz: [
+    'static/mar_feliz/1.png','static/mar_feliz/2.png','static/mar_feliz/3.png',
+    'static/mar_feliz/4.png','static/mar_feliz/5.png','static/mar_feliz/6.png',
+    'static/mar_feliz/7.png','static/mar_feliz/8.png','static/mar_feliz/9.png',
+    'static/mar_feliz/10.png','static/mar_feliz/11.png','static/mar_feliz/12.png',
+    'static/mar_feliz/13.png','static/mar_feliz/14.png','static/mar_feliz/15.png',
+    'static/mar_feliz/16.png','static/mar_feliz/17.png','static/mar_feliz/18.png',
+    'static/mar_feliz/19.png','static/mar_feliz/20.png'
+  ],
+
+  triste: [
+    'static/mar_triste/1.png','static/mar_triste/2.png','static/mar_triste/3.png',
+    'static/mar_triste/4.png','static/mar_triste/5.png','static/mar_triste/6.png',
+    'static/mar_triste/7.png','static/mar_triste/8.png','static/mar_triste/9.png',
+    'static/mar_triste/10.png','static/mar_triste/11.png','static/mar_triste/12.png',
+    'static/mar_triste/13.png','static/mar_triste/14.png','static/mar_triste/15.png',
+    'static/mar_triste/16.png','static/mar_triste/17.png','static/mar_triste/18.png',
+    'static/mar_triste/19.png','static/mar_triste/20.png','static/mar_triste/21.png'
+  ],
+
+  neutro: [
+    'static/mar_neutro/1.png','static/mar_neutro/2.png','static/mar_neutro/3.png',
+    'static/mar_neutro/4.png','static/mar_neutro/5.png','static/mar_neutro/6.png',
+    'static/mar_neutro/7.png','static/mar_neutro/8.png','static/mar_neutro/9.png',
+    'static/mar_neutro/10.png','static/mar_neutro/11.png','static/mar_neutro/12.png',
+    'static/mar_neutro/13.png','static/mar_neutro/14.png','static/mar_neutro/15.png',
+    'static/mar_neutro/16.png','static/mar_neutro/17.png','static/mar_neutro/18.png',
+    'static/mar_neutro/19.png','static/mar_neutro/20.png'
+  ]
+};
+
+/* Traduções */
+const traducoes = {
+  happy: 'feliz',
+  sad: 'triste',
+  neutral: 'neutro',
+  angry: 'triste',
+  fearful: 'triste',
+  disgusted: 'triste',
+  surprised: 'feliz'
+};
+
+function getQueryParam(name){
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+function imagemAleatoria(lista){
+  return lista[Math.floor(Math.random() * lista.length)];
+}
+
+const emocaoOriginal = getQueryParam('emocao') || 'neutral';
+const conf = getQueryParam('conf') || '0';
+const emocaoTraduzida = traducoes[emocaoOriginal] || 'nenhuma';
+
+document.getElementById('emocaoTitle').innerText =
+  emocaoTraduzida.charAt(0).toUpperCase() + emocaoTraduzida.slice(1);
+
+document.getElementById('confTitle').innerText = `Confiança: ${conf}%`;
+
+if(imagensPorEmocao[emocaoTraduzida]){
+  document.getElementById('imagemEmocao').src =
+    imagemAleatoria(imagensPorEmocao[emocaoTraduzida]);
+} else {
+  document.getElementById('imagemEmocao').style.display = 'none';
+}
+
+/* Voltar */
+function voltar(){
+  window.location.href = 'index.html';
+}
+  </script>
+
+</body>
+</html>
